@@ -10,7 +10,7 @@ def create_app(test_config=None):
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
     )
 
-    from . import index
+    from nobunaga.blueprints import index
     app.register_blueprint(index.bp)
 
     return app
