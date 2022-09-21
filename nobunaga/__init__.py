@@ -1,13 +1,30 @@
 import os
-
+from dotenv import load_dotenv
 from flask import Flask
 
-def create_app(test_config=None):
-    # create and configure the app
+def create_app():
+    load_dotenv()
+
+    rpchost = os.getenv("rpchost")
+    rpcport = os.getenv("rpcport")
+    rpcuser = os.getenv("rpcuser")
+    rpcpass = os.getenv("rpcpass")
+
+    if rpchost is None:
+        rpchost = "localhost"
+
+    if rpcport is None:
+        rpcport = "8332"
+
+    if rpcuser is None or rpcpass is None:
+        print("RPC credentials not found on .env file")
+        exit()
+
+    
     app = Flask(__name__, instance_relative_config=True)
+
     app.config.from_mapping(
-        SECRET_KEY='dev',
-        DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
+        RPC_URL=f"http://{rpcuser}:{rpcpass}@{rpchost}:{rpcport}"
     )
 
     from nobunaga.blueprints import index

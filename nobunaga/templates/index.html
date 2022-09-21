@@ -1,4 +1,116 @@
 {% extends "main.html" %}
 
 {% block body %}
+
+<div class="font-monospace text-uppercase">
+	<div class="row">
+		<div class="col-lg-4 py-2">
+			<div class="card">
+				<div class="card-body">
+					<h3 class="card-title py-3">Blockchain</h5>
+					<table class="table table-sm table-borderless">
+						<tbody>
+							<tr>
+								<th scope="row">Current chain</th>
+								<td>{{ blockchaininfo["chain"] }}net</td>
+							</tr>
+							<tr>
+								<th scope="row">Pruned?</th>
+								<td>{{ blockchaininfo["pruned"] }}</td>
+							</tr>
+							<tr>
+								<th scope="row">Sync Progress</th>
+								<td>{{ (blockchaininfo["verificationprogress"]*100)|round(4) }} %</td>
+							</tr>
+							<tr>
+								<th scope="row">Blocks</th>
+								<td>{{ blockchaininfo["blocks"] }}</td>
+							</tr>
+							<tr>
+								<th scope="row">Disk space</th>
+								<td>{{ (blockchaininfo["size_on_disk"]/(2**30))|round(4) }} GB</td>
+							</tr>
+							<tr>
+								<th scope="row">Difficulty</th>
+								<td>{{ blockchaininfo["difficulty"]|round(4) }}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-4 py-2">
+			<div class="card">
+				<div class="card-body">
+					<h3 class="card-title py-3">Network</h5>
+					<table class="table table-sm table-borderless">
+						<tbody>
+							<tr>
+								<th scope="row">Connected?</th>
+								<td>{{ networkinfo["networkactive"] }}</td>
+							</tr>
+							<tr>
+								<th scope="row">Sub-version</th>
+								<td>{{ networkinfo["subversion"] }}</td>
+							</tr>
+							<tr>
+								<th scope="row">Protocol</th>
+								<td>{{ networkinfo["protocolversion"] }}</td>
+							</tr>
+							<tr>
+								<th scope="row">Connections</th>
+								<td>{{ networkinfo["connections"] }}
+								({{ networkinfo["connections_in"]}} in / {{ networkinfo["connections_out"] }} out)</td>
+							</tr>
+							<tr>
+								<th scope="row">Networks</th>
+								<td>{{ networks }}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-4 py-2">
+			<div class="card">
+				<div class="card-body">
+					<h3 class="card-title py-3">Mempool</h5>
+					<table class="table table-sm table-borderless">
+						<tbody>
+							<tr>
+								<th scope="row">Has space left?</th>
+								<td>{{ mempoolinfo["loaded"] }}</td>
+							</tr>
+							<tr>
+								<th scope="row">Transactions</th>
+								<td>{{ mempoolinfo["size"] }}</td>
+							</tr>
+							<tr>
+								<th scope="row">Total Fees</th>
+								<td>{{ "%.8f"|format(mempoolinfo["total_fee"]) }} BTC</td>
+							</tr>
+							<tr>
+								<th scope="row">Memory Usage</th>
+								<td>{{ ((mempoolinfo["usage"]/mempoolinfo["maxmempool"])*100)|round(4) }} %</td>
+							</tr>
+							<tr>
+								<th scope="row">Mempool Size</th>
+								<td>{{ (mempoolinfo["maxmempool"]/2**20)|round(4) }} MB</td>
+							</tr>
+							<tr>
+								<th scope="row">Min Relay Fee</th>
+								<td>{{ "%.8f"|format(mempoolinfo["minrelaytxfee"]) }} BTC</td>
+							</tr>
+							<tr>
+								<th scope="row">Min Fee Rate</th>
+								<td>{{ "%.8f"|format(mempoolinfo["mempoolminfee"]) }} BTC/kB</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 {% endblock %}
