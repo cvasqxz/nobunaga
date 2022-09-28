@@ -1,27 +1,47 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>信長{% if view|length > 0 %} - {{ view }}{% endif %}</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <style type="text/css">
-      body { background: #0A0A0A; color: #EEE; font-size: 0.8em; }
-      th { text-decoration: underline; text-decoration-color: #E0FFFF; color: #61D6C4; }
-      td { color: #BBEAFE; }
-      .card { background: #0F0F0F; border-color: #222; }
-      h1 { font-size: 6em; font-weight: bolder; }
-    </style>
-  </head>
-  <body>
-      <div class="text-center py-5">
-          <h1>信長</h1>
-      </div>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>信長{% if view|length > 0 %} - {{ view }}{% endif %}</title>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+		<meta http-equiv="refresh" content="10">
+		<style type="text/css">
+			body { background-color: #0C0C0A; background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPSc0MDAnIGhlaWdodD0nMjAwJyB2aWV3Qm94PScwIDAgMTYwIDgwJz48ZyBmaWxsPScjMEYwRDBEJyA+PHBvbHlnb24gcG9pbnRzPScwIDEwIDAgMCAxMCAwJy8+PHBvbHlnb24gcG9pbnRzPScwIDQwIDAgMzAgMTAgMzAnLz48cG9seWdvbiBwb2ludHM9JzAgMzAgMCAyMCAxMCAyMCcvPjxwb2x5Z29uIHBvaW50cz0nMCA3MCAwIDYwIDEwIDYwJy8+PHBvbHlnb24gcG9pbnRzPScwIDgwIDAgNzAgMTAgNzAnLz48cG9seWdvbiBwb2ludHM9JzUwIDgwIDUwIDcwIDYwIDcwJy8+PHBvbHlnb24gcG9pbnRzPScxMCAyMCAxMCAxMCAyMCAxMCcvPjxwb2x5Z29uIHBvaW50cz0nMTAgNDAgMTAgMzAgMjAgMzAnLz48cG9seWdvbiBwb2ludHM9JzIwIDEwIDIwIDAgMzAgMCcvPjxwb2x5Z29uIHBvaW50cz0nMTAgMTAgMTAgMCAyMCAwJy8+PHBvbHlnb24gcG9pbnRzPSczMCAyMCAzMCAxMCA0MCAxMCcvPjxwb2x5Z29uIHBvaW50cz0nMjAgMjAgMjAgNDAgNDAgMjAnLz48cG9seWdvbiBwb2ludHM9JzQwIDEwIDQwIDAgNTAgMCcvPjxwb2x5Z29uIHBvaW50cz0nNDAgMjAgNDAgMTAgNTAgMTAnLz48cG9seWdvbiBwb2ludHM9JzQwIDQwIDQwIDMwIDUwIDMwJy8+PHBvbHlnb24gcG9pbnRzPSczMCA0MCAzMCAzMCA0MCAzMCcvPjxwb2x5Z29uIHBvaW50cz0nNDAgNjAgNDAgNTAgNTAgNTAnLz48cG9seWdvbiBwb2ludHM9JzUwIDMwIDUwIDIwIDYwIDIwJy8+PHBvbHlnb24gcG9pbnRzPSc0MCA2MCA0MCA4MCA2MCA2MCcvPjxwb2x5Z29uIHBvaW50cz0nNTAgNDAgNTAgNjAgNzAgNDAnLz48cG9seWdvbiBwb2ludHM9JzYwIDAgNjAgMjAgODAgMCcvPjxwb2x5Z29uIHBvaW50cz0nNzAgMzAgNzAgMjAgODAgMjAnLz48cG9seWdvbiBwb2ludHM9JzcwIDQwIDcwIDMwIDgwIDMwJy8+PHBvbHlnb24gcG9pbnRzPSc2MCA2MCA2MCA4MCA4MCA2MCcvPjxwb2x5Z29uIHBvaW50cz0nODAgMTAgODAgMCA5MCAwJy8+PHBvbHlnb24gcG9pbnRzPSc3MCA0MCA3MCA2MCA5MCA0MCcvPjxwb2x5Z29uIHBvaW50cz0nODAgNjAgODAgNTAgOTAgNTAnLz48cG9seWdvbiBwb2ludHM9JzYwIDMwIDYwIDIwIDcwIDIwJy8+PHBvbHlnb24gcG9pbnRzPSc4MCA3MCA4MCA4MCA5MCA4MCAxMDAgNzAnLz48cG9seWdvbiBwb2ludHM9JzgwIDEwIDgwIDQwIDExMCAxMCcvPjxwb2x5Z29uIHBvaW50cz0nMTEwIDQwIDExMCAzMCAxMjAgMzAnLz48cG9seWdvbiBwb2ludHM9JzkwIDQwIDkwIDcwIDEyMCA0MCcvPjxwb2x5Z29uIHBvaW50cz0nMTAgNTAgMTAgODAgNDAgNTAnLz48cG9seWdvbiBwb2ludHM9JzExMCA2MCAxMTAgNTAgMTIwIDUwJy8+PHBvbHlnb24gcG9pbnRzPScxMDAgNjAgMTAwIDgwIDEyMCA2MCcvPjxwb2x5Z29uIHBvaW50cz0nMTEwIDAgMTEwIDIwIDEzMCAwJy8+PHBvbHlnb24gcG9pbnRzPScxMjAgMzAgMTIwIDIwIDEzMCAyMCcvPjxwb2x5Z29uIHBvaW50cz0nMTMwIDEwIDEzMCAwIDE0MCAwJy8+PHBvbHlnb24gcG9pbnRzPScxMzAgMzAgMTMwIDIwIDE0MCAyMCcvPjxwb2x5Z29uIHBvaW50cz0nMTIwIDQwIDEyMCAzMCAxMzAgMzAnLz48cG9seWdvbiBwb2ludHM9JzEzMCA1MCAxMzAgNDAgMTQwIDQwJy8+PHBvbHlnb24gcG9pbnRzPScxMjAgNTAgMTIwIDcwIDE0MCA1MCcvPjxwb2x5Z29uIHBvaW50cz0nMTEwIDcwIDExMCA4MCAxMzAgODAgMTQwIDcwJy8+PHBvbHlnb24gcG9pbnRzPScxNDAgMTAgMTQwIDAgMTUwIDAnLz48cG9seWdvbiBwb2ludHM9JzE0MCAyMCAxNDAgMTAgMTUwIDEwJy8+PHBvbHlnb24gcG9pbnRzPScxNDAgNDAgMTQwIDMwIDE1MCAzMCcvPjxwb2x5Z29uIHBvaW50cz0nMTQwIDUwIDE0MCA0MCAxNTAgNDAnLz48cG9seWdvbiBwb2ludHM9JzE0MCA3MCAxNDAgNjAgMTUwIDYwJy8+PHBvbHlnb24gcG9pbnRzPScxNTAgMjAgMTUwIDQwIDE2MCAzMCAxNjAgMjAnLz48cG9seWdvbiBwb2ludHM9JzE1MCA2MCAxNTAgNTAgMTYwIDUwJy8+PHBvbHlnb24gcG9pbnRzPScxNDAgNzAgMTQwIDgwIDE1MCA4MCAxNjAgNzAnLz48L2c+PC9zdmc+Cg=="); color: #EEE; font-size: 0.75em; }
+			th { text-decoration: underline; text-decoration-color: #E0FFFF; color: #61D6C4; }
+			td { color: #BBEAFE; }
+			.card { background: #0F0F0F; border-color: #222; }
+		</style>
+	</head>
+	<body>
 
-      <div class="container">
-        {% block body %}{% endblock %}
-      </div>
+<nav class="navbar navbar-expand-lg navbar-dark">
+	<div class="container-fluid">
+		<a class="navbar-brand" href="{{ url_for("main.index") }}"><h4>信長</h4></a>
+		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navAction" aria-controls="navAction" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navAction">
+			<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+				<li class="nav-item">
+					<a class="nav-link active" href="{{ url_for("main.index") }}">Home</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link active" href="#">Link</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link active">Disabled</a>
+				</li>
+			</ul>
+			
+		</div>
+	</div>
+</nav>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
-  </body>
+			<div class="container py-2">
+				{% block body %}{% endblock %}
+			</div>
+
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+	</body>
 </html>

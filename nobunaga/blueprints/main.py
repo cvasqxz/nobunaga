@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template
 from ..utils.rpcutils import RPC
 
-bp = Blueprint('index', __name__, url_prefix='/')
+bp = Blueprint('main', __name__, url_prefix='/')
 
 @bp.route('/')
 def index():
@@ -9,7 +9,9 @@ def index():
     networkinfo = RPC("getnetworkinfo")
     mempoolinfo = RPC("getmempoolinfo")
 
-    if networkinfo is None or networkinfo is None or mempoolinfo is None:
+    if networkinfo is None \
+    or networkinfo is None \
+    or mempoolinfo is None:
         return "disconnected"
 
     networks = [n["name"] for n in networkinfo["networks"] if n["reachable"]]

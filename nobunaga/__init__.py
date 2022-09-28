@@ -27,7 +27,7 @@ def create_app():
         RPC_URL=f"http://{rpcuser}:{rpcpass}@{rpchost}:{rpcport}"
     )
 
-    from nobunaga.blueprints import index
-    app.register_blueprint(index.bp)
+    from nobunaga.blueprints import main
+    app.register_blueprint(main.bp)
 
     return app
